@@ -3,6 +3,9 @@ library(ggplot2)
 library(dplyr)
 library(tidyr)
 
+# exports folder
+if (!dir.exists('exports')) dir.create('exports')
+
 # The obvious option...
 penguins %>%
   ggplot(aes(x=species, y=bill_length_mm, fill=species)) +
@@ -12,7 +15,7 @@ penguins %>%
   theme_minimal()
 
 #load functions
-source('barcodeBoxPlot.R')
+source('exports/barcodeBoxPlot.R')
 
 # build base plot with the barcode
 p <- barcodeBoxPlot(penguins, species, bill_length_mm,
@@ -30,7 +33,7 @@ p  +
   geom_violin(fill=NA,
               scale='count')
 
-ggsave('BodyMass2.png', width=8.47, height=7.47)
+ggsave('exports/bill_length_mm.png', width=8.47, height=7.47)
 
 # with raincloud overlay
 p +
@@ -42,7 +45,7 @@ p +
     seed = 1, width = .07)) +
   coord_cartesian(xlim = c(0.6, NA), clip = "off")
 
-ggsave('BodyMass3.png', width=8.47, height=7.47)
+ggsave('exports/bill_length_mm2.png', width=8.47, height=7.47)
 
 
 
@@ -64,7 +67,7 @@ p2 +
     seed = 1, width = .07)) +
   coord_cartesian(xlim = c(0.6, NA), clip = "off")
 
-barcodeBoxPlot(iris, Species, Petal.Width,
+barcodeBoxPlot(penguins, species, bill_length_mm,
                      .gapnudge=.38, .alpharange=c(0.1,.6)) +
   geom_boxplot(width = .15, outlier.shape = NA, fill=NA) +
   geom_point(size = 1.3, alpha=0.3, position = position_jitter(
