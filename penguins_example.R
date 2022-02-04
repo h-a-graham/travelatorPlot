@@ -2,6 +2,8 @@ library(palmerpenguins)
 library(ggplot2)
 library(dplyr)
 library(tidyr)
+#load functions
+source('barcodeBoxPlot.R')
 
 # exports folder
 if (!dir.exists('exports')) dir.create('exports')
@@ -13,9 +15,6 @@ penguins %>%
   scale_fill_brewer(palette = 'Dark2') +
   geom_jitter() +
   theme_minimal()
-
-#load functions
-source('exports/barcodeBoxPlot.R')
 
 # build base plot with the barcode
 p <- barcodeBoxPlot(penguins, species, bill_length_mm,
