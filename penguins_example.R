@@ -19,7 +19,7 @@ penguins %>%
 
 # build base plot with the barcode
 p <- barcodeBoxPlot(penguins, species, bill_length_mm,
-                    .gapnudge=.35, .alpharange=c(0.1,.6)) +
+                    .gapnudge=.35, .alpharange=c(0.1,1)) +
   theme_light()+
   labs(x='Species', y='Bill Length (mm)') +
   guides(fill="none", alpha='none')+
@@ -40,7 +40,7 @@ p +
   ggdist::stat_halfeye(adjust = .3, width = .3, .width = 0, justification = -.3,
     point_colour = 'NA', slab_fill=NA, slab_colour='black',
     slab_size=0.4) +
-  ggdist::stat_gradientinterval(width=5)+
+  # ggdist::stat_gradientinterval(width=5)+
   geom_boxplot(width = .15, outlier.shape = NA, fill=NA) +
   ggdist::stat_dots(
     side = "left",
@@ -79,6 +79,38 @@ penguins %>%
   coord_cartesian(xlim = c(1, NA), clip = "off")
 
 ggsave('exports/bill_length_mm3.png', width=8.47, height=7.47)
+
+
+
+
+penguins %>%
+  ggplot(aes(x = species, y = bill_length_mm, fill = species)) +
+  stat_gradientinterval(aes(fill=stat(pdf)),position = "dodge", colour=NA,
+                        width=0.8, slab_type='pdf', fill_type = "gradient") +
+  scale_fill_gradientn(colours=viridisLite::mako(255))+
+  theme_light()+
+  labs(x='Species', y='Bill Length (mm)') +
+  guides(fill="none", alpha='none')+
+  theme(axis.title.y = element_text(margin = margin(t = 0, r = 10, b = 0, l = 0)),
+        axis.title.x = element_text(margin = margin(t = 10, r = 0, b = 0, l = 0)))+
+  ggdist::stat_halfeye(adjust = .3, width = .3, .width = 0, justification = -.3,
+                       point_colour = 'NA', slab_fill=NA, slab_colour='black',
+                       slab_size=0.7, fill=NA) +
+  geom_boxplot(width = .15, outlier.shape = NA, fill=NA) +
+  ggdist::stat_dots(
+    side = "left",
+    dotsize = .8,
+    justification = 1.15,
+    binwidth = .3,
+    colour='black',
+    fill=NA) +
+  coord_cartesian(xlim = c(1, NA), clip = "off")
+
+
+
+
+# extras
+
 
 
 

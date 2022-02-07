@@ -4,7 +4,7 @@ density_function <- function(df, xcol, ycol, length.out=5){
                 max(df[[ycol]],   na.rm = TRUE), length.out =length.out)
 
     df1 <- df %>%
-      mutate(bin = cut(.[[ycol]], bins, ordered_result=TRUE)) %>%
+      mutate(bin = .bincode(.[[ycol]], bins)) %>%
       group_by(bin) %>%
       summarise(density=n())
 
@@ -21,7 +21,7 @@ density_function <- function(df, xcol, ycol, length.out=5){
 
     df1 %>%
       mutate(bin_val=bins,
-             bin_max = lead(bin_val, default=max(bins)+(bins[2]-bins[1])),
+             bin_max = lead(bin_val, default=max(bins)),
              bin_chr = as.character(bin),
              group=pull(df, xcol)[1]) %>%
       replace_na(list(bin_chr='max_bin')) %>%
