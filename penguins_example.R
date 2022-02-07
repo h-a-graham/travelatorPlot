@@ -58,7 +58,8 @@ ggsave('exports/bill_length_mm2.png', width=8.47, height=7.47)
 # the right way:
 penguins %>%
   ggplot(aes(x = species, y = bill_length_mm, fill = species)) +
-  stat_gradientinterval(adjust=0.7,position = "dodge", colour=NA, width=0.9) +
+  stat_gradientinterval(adjust=0.7,position = "dodge", colour=NA, width=0.9,
+                        , fill_type = "gradient") +
   theme_light()+
   labs(x='Species', y='Bill Length (mm)') +
   guides(fill="none", alpha='none')+
@@ -68,7 +69,7 @@ penguins %>%
   ggdist::stat_halfeye(adjust = .3, width = .3, .width = 0, justification = -.3,
                        point_colour = 'NA', slab_fill=NA, slab_colour='black',
                        slab_size=0.7) +
-  geom_boxplot(width = .15, outlier.shape = NA, fill=NA) +
+  geom_boxplot(width = .15, outlier.shape = NA, fill='white') +
   ggdist::stat_dots(
     side = "left",
     dotsize = .8,
@@ -95,7 +96,7 @@ penguins %>%
   ggdist::stat_halfeye(adjust = .5, width = .2, .width = 0, justification = -.1,
                        point_colour = 'NA', slab_fill=NA, slab_colour='black',
                        slab_size=0.7, fill=NA, lwd=0.5) +
-  geom_boxplot(width = .15, outlier.shape = NA, fill=NA,
+  geom_boxplot(width = .15, outlier.shape = NA, fill='white',
                position = position_nudge(x = -0.1)) +
   coord_cartesian(xlim = c(1, NA), clip = "off")
 

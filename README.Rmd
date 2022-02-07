@@ -44,7 +44,7 @@ penguins %>%
   ggdist::stat_halfeye(adjust = .3, width = .3, .width = 0, justification = -.3,
                        point_colour = 'NA', slab_fill=NA, slab_colour='black',
                        slab_size=0.4) +
-  geom_boxplot(width = .15, outlier.shape = NA, fill=NA) +
+  geom_boxplot(width = .15, outlier.shape = NA, fill='white') +
   ggdist::stat_dots(
     side = "left",
     dotsize = .8,
