@@ -59,7 +59,7 @@ ggsave('exports/bill_length_mm2.png', width=8.47, height=7.47)
 penguins %>%
   ggplot(aes(x = species, y = bill_length_mm, fill = species)) +
   stat_gradientinterval(adjust=0.7,position = "dodge", colour=NA, width=0.9,
-                        , fill_type = "gradient") +
+                        fill_type = "gradient") +
   theme_light()+
   labs(x='Species', y='Bill Length (mm)') +
   guides(fill="none", alpha='none')+
